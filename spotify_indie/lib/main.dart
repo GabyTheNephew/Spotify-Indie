@@ -23,10 +23,10 @@ void main() async {
   await Hive.openBox('playlistsBox');
 
   await JustAudioBackground.init(
-    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio2',
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio1',
     androidNotificationChannelName: 'Audio playback',
     androidNotificationOngoing: true,
-    androidNotificationIcon: 'drawable/ic_stat_music_note',
+    androidNotificationIcon: 'mipmap/ic_launcher',
   );
 
   if (await Permission.notification.isDenied) {
