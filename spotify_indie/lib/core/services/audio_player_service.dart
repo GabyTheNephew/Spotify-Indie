@@ -65,8 +65,16 @@ class AudioPlayerService {
         title: song.title,
         artist: song.artist,
         artUri: Uri.parse(song.imageUrl),
-        // Salvăm obiectul Song original în extras pentru a-l recupera ușor în UI
-        extras: {'song_model': song},
+        // MODIFICARE: Nu pune obiectul 'song' direct!
+        // Platform channels suportă doar tipuri simple (Map, String, int).
+        // Poți pune datele ca un Map simplu:
+        extras: {
+          'id': song.id,
+          'title': song.title,
+          'artist': song.artist,
+          'image': song.imageUrl,
+          'audio': song.audioUrl,
+        },
       ),
     );
   }

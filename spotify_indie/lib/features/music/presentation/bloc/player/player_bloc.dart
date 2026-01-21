@@ -88,6 +88,21 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       final mediaItem = audioSource.tag as MediaItem;
       final song = mediaItem.extras?['song_model'] as Song?;
 
+      final extras = mediaItem.extras;
+
+      if (extras != null) {
+        // Reconstruim obiectul Song manual
+        final song = Song(
+          id: extras['id'] as String? ?? '',
+          title: mediaItem.title, // Putem lua titlul direct din MediaItem
+          artist: mediaItem.artist ?? 'Unknown', // La fel și artistul
+          imageUrl: extras['image'] as String? ?? '', // Imaginea din extras
+          audioUrl: extras['audio'] as String? ?? '', // Audio URL din extras
+        );
+
+        add(UpdateCurrentSongInternalEvent(song));
+      }
+
       if (song != null) {
         add(UpdateCurrentSongInternalEvent(song));
       }
