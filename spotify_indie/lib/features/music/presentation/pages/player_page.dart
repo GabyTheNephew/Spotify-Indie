@@ -8,6 +8,7 @@ import '../../domain/entities/song.dart';
 import '../bloc/player/player_bloc.dart';
 import '../bloc/player/player_event.dart';
 import '../bloc/player/player_state.dart';
+import 'package:spotify_indie/features/music/presentation/widgets/lyric_sheet.dart';
 
 class PlayerPage extends StatelessWidget {
   const PlayerPage({super.key});
@@ -256,8 +257,25 @@ class PlayerPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end, // Dreapta
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Dreapta
                   children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.mic_none,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {
+                        if (song != null) {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (_) => LyricsSheet(song: song!),
+                          );
+                        }
+                      },
+                    ),
                     IconButton(
                       icon: const Icon(
                         Icons.queue_music,

@@ -13,6 +13,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'features/music/presentation/pages/main_screen.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,11 @@ void main() async {
   // 2. Deschidem cutia (baza de date) pentru playlist-uri
   await Hive.openBox('playlistsBox');
 
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    print("Nu s-a putut încărca fișierul .env: $e");
+  }
   await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio1',
     androidNotificationChannelName: 'Audio playback',
